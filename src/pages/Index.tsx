@@ -10,50 +10,73 @@ interface Game {
   image: string;
   category: string;
   description: string;
+  downloadUrl: string;
 }
 
 const games: Game[] = [
   {
     id: 1,
-    title: 'Skull Island',
-    image: '/img/596ae314-90db-4478-b267-858c655c6157.jpg',
+    title: 'Silksong',
+    image: '/img/2b0b66ca-030d-459b-9e0f-ad9a841a9d6a.jpg',
     category: 'Adventure',
-    description: 'Explore mysterious pirate islands'
+    description: 'Master acrobatic movement in this sequel to Hollow Knight',
+    downloadUrl: 'https://example.com/silksong'
   },
   {
     id: 2,
-    title: 'Ocean Raiders',
-    image: '/img/e86ceeae-292e-442d-be2a-c974243b594a.jpg',
+    title: 'GTA 5',
+    image: '/img/17dac5e2-7a26-4242-9305-72d4d6bafb87.jpg',
     category: 'Action',
-    description: 'Command your pirate ship fleet'
+    description: 'Experience the criminal underworld of Los Santos',
+    downloadUrl: 'https://example.com/gta5'
   },
   {
     id: 3,
-    title: 'Treasure Hunt',
-    image: '/img/04f20b17-c888-45c8-9e37-442fb5bd283d.jpg',
-    category: 'Puzzle',
-    description: 'Find legendary pirate treasures'
+    title: 'Rust',
+    image: '/img/00b3d6e2-5d9b-4c4c-b5b3-46f3b1e489aa.jpg',
+    category: 'Survival',
+    description: 'Survive, build, and dominate in this multiplayer survival game',
+    downloadUrl: 'https://example.com/rust'
   },
   {
     id: 4,
-    title: 'Black Pearl',
-    image: '/img/e86ceeae-292e-442d-be2a-c974243b594a.jpg',
-    category: 'Strategy',
-    description: 'Build your pirate empire'
+    title: 'Geometry Dash',
+    image: '/img/4d29789a-be9a-4c38-b5ca-cf70e32cc44e.jpg',
+    category: 'Arcade',
+    description: 'Jump and fly through danger in this rhythm-based platformer',
+    downloadUrl: 'https://example.com/geometrydash'
   },
   {
     id: 5,
-    title: 'Cursed Waters',
+    title: 'Skull Island',
     image: '/img/596ae314-90db-4478-b267-858c655c6157.jpg',
-    category: 'Horror',
-    description: 'Survive haunted pirate ships'
+    category: 'Adventure',
+    description: 'Explore mysterious pirate islands',
+    downloadUrl: 'https://example.com/skullisland'
   },
   {
     id: 6,
-    title: 'Gold Rush',
+    title: 'Ocean Raiders',
+    image: '/img/e86ceeae-292e-442d-be2a-c974243b594a.jpg',
+    category: 'Action',
+    description: 'Command your pirate ship fleet',
+    downloadUrl: 'https://example.com/oceanraiders'
+  },
+  {
+    id: 7,
+    title: 'Treasure Hunt',
     image: '/img/04f20b17-c888-45c8-9e37-442fb5bd283d.jpg',
-    category: 'Arcade',
-    description: 'Collect as much gold as possible'
+    category: 'Puzzle',
+    description: 'Find legendary pirate treasures',
+    downloadUrl: 'https://example.com/treasurehunt'
+  },
+  {
+    id: 8,
+    title: 'Black Pearl',
+    image: '/img/e86ceeae-292e-442d-be2a-c974243b594a.jpg',
+    category: 'Strategy',
+    description: 'Build your pirate empire',
+    downloadUrl: 'https://example.com/blackpearl'
   }
 ];
 
@@ -61,7 +84,7 @@ export default function Index() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
 
-  const categories = ['All', 'Adventure', 'Action', 'Puzzle', 'Strategy', 'Horror', 'Arcade'];
+  const categories = ['All', 'Adventure', 'Action', 'Survival', 'Arcade', 'Puzzle', 'Strategy'];
 
   const filteredGames = games.filter(game => {
     const matchesSearch = game.title.toLowerCase().includes(searchQuery.toLowerCase());
@@ -157,9 +180,13 @@ export default function Index() {
                     {game.category}
                   </span>
                 </div>
-                <Button className="w-full group/btn">
-                  <span className="mr-2">Play</span>
-                  <Icon name="Play" size={16} className="transition-transform group-hover/btn:translate-x-1" />
+                <Button 
+                  className="w-full group/btn"
+                  onClick={() => window.open(game.downloadUrl, '_blank')}
+                >
+                  <Icon name="Download" size={16} className="mr-2" />
+                  <span>Download</span>
+                  <Icon name="ExternalLink" size={14} className="ml-2 transition-transform group-hover/btn:translate-x-1" />
                 </Button>
               </CardContent>
             </Card>
